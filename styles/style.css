@@ -24,20 +24,29 @@ main {
     justify-content: center;
 }
 
-#intro {
+main div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center 
+}
+
+button {
+    background-color: #247BA0;
+    border: 1px solid black;
+    color: white;
+    padding: 15px 32px;
+    margin-top: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+
+/* #intro {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-}
-
-#start-quiz-button {
-    background-color: #247BA0;
-    border: 1px solid black;
-    color: white;
-    padding: 10px 32px;
-    font-size: 18px;
-    border-radius: 8px;
-}
+} */
 
 
