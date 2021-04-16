@@ -160,9 +160,10 @@ function nextQuestion() {
     console.log('nextquestion');
     counter = counter +1;
     console.log(counter);
-    if (counter > allQuestions.length) {
+    if (counter >= allQuestions.length) {
         calcScore();
     } else {
+        headerElement.textContent = allQuestions[counter].question;
         for (var i = 0; i < allQuestions[counter].answers.length; i++) {
             var temp = document.createElement("section");
             temp.className = "ansbutton-section";
@@ -183,6 +184,11 @@ function nextQuestion() {
                     console.log('Incorrect');
                 }
                 console.log(score);
+
+            for (var r = 0; r<answerButtons.length; r++) {
+                var remove = document.querySelector(".ansbutton-section");
+                remove.parentElement.removeChild(remove);
+            }    
             nextQuestion();            
         })
     
@@ -193,6 +199,7 @@ function nextQuestion() {
 function calcScore() {
     console.log("YAY");
     console.log(score);
+    headerElement.style.display = "none";    
 }
 
 function highScores() {
