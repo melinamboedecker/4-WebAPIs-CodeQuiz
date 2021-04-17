@@ -52,6 +52,12 @@ button {
     text-align: left;
 }
 
+#bottom-p {
+    margin: 5%;
+    padding: 3%;
+    font-size: x-large;
+}
+
 #highscores-buttons {
     display: inline;
 }
