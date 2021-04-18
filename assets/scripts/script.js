@@ -7,28 +7,23 @@ var timerText = document.querySelector("#timer-text");
 var timerCount;
 var header = document.querySelector("header");
 var answerButtons
+var initialsElement = document.querySelector("#submit-initials");
+var submitButton = document.querySelector("#submit-btn");
 
 //create elements
-var h1El = document.createElement("h1");
+//var h1El = document.createElement("h1");
 var par = document.createElement("p");
 var startQuizBtn = document.createElement("button")
-
-//create button elements for answers
-// var answerBtn0 = document.querySelector("#answerbutton0");
-// var answerBtn1 = document.querySelector("#answerbutton1");
-// var answerBtn2 = document.querySelector("#answerbutton2");
-// var answerBtn3 = document.querySelector("#answerbutton3");
+//var initialsForm = document.createElement("form");
 
 var score = 0;
+var initials = document.getElementById("initials");
 
+//for local storage
+//var storedScore = localStorage.getItem("store");
+//var storedInitials = localStorage.getItem("initials");
 
-// var test = document.createElement("p");
-// topP.appendChild(test);
-// test.textContent = "testing this element";
-// test.className = "testclass";
-// var t = document.querySelector(".testclass");
-//t.parentElement.removeChild(t);
-
+var userScore = [];
 
 var allQuestions = [
     {
@@ -86,12 +81,14 @@ console.log(questionOrder.length);
 
 function init() {
     timerText.style.display = "none";
-    h1El.textContent = "Coding Quiz Challenge";
-    headerElement.appendChild(h1El);
+    headerElement.textContent = "Coding Quiz Challenge";
+    headerElement.setAttribute("style", "font-weight:bold; font-size:180%");
+    //headerElement.appendChild(h1El);
     par.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will remove ten seconds from your remaining time!";
     topP.appendChild(par);
     startQuizBtn.textContent = "Start Quiz";
     buttonContainer.appendChild(startQuizBtn);
+    initialsElement.style.display = "none"
 }
 
 function startQuiz() {
@@ -99,6 +96,7 @@ function startQuiz() {
     timerCount = 75;
     startTimer()
     startQuestions();
+    headerElement.setAttribute("style", "font-weight:normal; font-size:13s0%");
 }
 
 function startTimer() {
@@ -135,7 +133,7 @@ function startQuestions(event) {
             console.log(this.textContent);
             if (this.textContent === allQuestions[counter].correctAnswer) {
                 bottomP.textContent = "Correct!";
-                bottomP.setAttribute("style", "border-top: 2px solid black");
+                bottomP.setAttribute("style", "border-top: 2px dotted #666666; color: #666666");
                 score = score + 10;
                 setTimeout(function(){
                     bottomP.textContent = "";
@@ -173,7 +171,6 @@ function nextQuestion() {
     counter = counter + 1;
     console.log(counter);
     if (counter >= allQuestions.length) {
-        calcScore();
         timerCount = 0;
     } else {
         headerElement.textContent = allQuestions[counter].question;
@@ -220,40 +217,46 @@ function nextQuestion() {
     }
 }
 
+
 function calcScore() {
-    console.log("YAY");
+    headerElement.textContent = "All Done!";
+    timerText.style.display = "none";
+    timerElement.style.display = "none";
+    initialsElement.style.display = "flex";
     console.log(score);
-    //put initials and score into local memory
-    headerElement.style.display = "none";
-}
-
-function highScores() {
-    header.style.display = "none";
-}
-
-function demoQuiz() {
-    console.log("demo");
-    var counter = 0;
-    topP.style.display = "none";
-    startQuizBtn.style.display = "none";
-    //var answerButtons = document.querySelector("button");
-
-    console.log(allQuestions);
-    headerElement.textContent = allQuestions[counter].question;
-    console.log(allQuestions[counter].answers);
-
-    for (var i = 0; i < allQuestions[counter].answers.length; i++) {
-        var temp = document.createElement("button");
-        temp.className = "ansbutton";
-        temp.textContent = allQuestions[counter].answers[i];
-        buttonContainer.appendChild(temp);
-    }
-    var answerButtons = document.querySelector(".ansbutton");
-    answerButtons.addEventListener("click", function (event) {
-        alert(this.id);
+    topP.style.display = "flex";
+    topP.textContent = "Your final score is " + score;
+    localStorage.setItem("userscore", userScore);
+    //userScore = {};
+    //userScore.push(score);
+    //console.log("HERE IS THE "+userScore);
+    //var initialsForm = document.createElement("form");
+    //initialsForm.className = "initials-form";
+    //initialsForm.textContent = "Initials";
+    //bottomP.appendChild(initialsForm);
+    //initials = initials.value.trim();
+    console.log(initials);
+    submitButton.addEventListener("click", function(event) {
+        console.log(this.textContent);
+        var userScore = {
+            initials: initials.value,
+            score: score
+        }
+        console.log(userScore);
+        localStorage.setItem("userscore", JSON.stringify(userScore));
+        location.href = "highscores.html";
     });
+    
+
+    //answerButtons = document.querySelectorAll(".ansbutton-section");
+
+    //put initials and score into local memory
 }
 
+
+// function highScores() {
+//     header.style.display = "none";
+// }
 
 
 init();
