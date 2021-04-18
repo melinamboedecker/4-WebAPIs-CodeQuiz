@@ -23,7 +23,7 @@ var initials = document.getElementById("initials");
 //var storedScore = localStorage.getItem("store");
 //var storedInitials = localStorage.getItem("initials");
 
-var userScore = [];
+//var userScore = [];
 
 var allQuestions = [
     {
@@ -226,7 +226,7 @@ function calcScore() {
     console.log(score);
     topP.style.display = "flex";
     topP.textContent = "Your final score is " + score;
-    localStorage.setItem("userscore", userScore);
+    //localStorage.setItem("userscore", userScore);
     //userScore = {};
     //userScore.push(score);
     //console.log("HERE IS THE "+userScore);
@@ -238,12 +238,28 @@ function calcScore() {
     console.log(initials);
     submitButton.addEventListener("click", function(event) {
         console.log(this.textContent);
-        var userScore = {
-            initials: initials.value,
-            score: score
+        
+        var allScores = JSON.parse(localStorage.getItem("allScores")) || [];
+        console.log(allScores);
+        
+        function saveAllScores (event) {
+            event.preventDefault(event);
+
+            var userScore = {
+                score: score,
+                initials: initials.value
+            };
+
+            allScores.push(userScore);
+            allScores.sort( (a, b) => {
+                return b.score - a.score;
+            });
+
+            localStorage.setItem("allScores", JSON.stringify(allScores));
+            console.log(allScores);
         }
-        console.log(userScore);
-        localStorage.setItem("userscore", JSON.stringify(userScore));
+        saveAllScores(event);
+        
         location.href = "highscores.html";
     });
     
