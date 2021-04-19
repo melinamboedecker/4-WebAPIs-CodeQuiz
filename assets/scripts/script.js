@@ -239,15 +239,24 @@ function calcScore() {
     submitButton.addEventListener("click", function(event) {
         console.log(this.textContent);
         
-        var allScores = JSON.parse(localStorage.getItem("allScores")) || [];
-        console.log(allScores);
+        var allScores;
+
+        console.log(localStorage.getItem("allScores"));
+
+         if (localStorage.getItem("allScores") === null) {
+             allScores = [];
+         }
+        
+         else {
+             allScores = JSON.parse(localStorage.getItem("allScores"));
+             console.log(allScores)};
         
         function saveAllScores (event) {
             event.preventDefault(event);
 
             var userScore = {
-                score: score,
-                initials: initials.value
+            score: score,
+            initials: initials.value
             };
 
             allScores.push(userScore);

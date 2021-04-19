@@ -1,5 +1,14 @@
 var listofscores = document.getElementById("listofscores");
-var allScores = JSON.parse(localStorage.getItem("allScores")) || [];
+var allScores;
+var clearHighscores = document.getElementById("clear-highscores");
+
+if (localStorage.getItem("allScores") === null) {
+    allScores = [];
+}
+
+else {
+    allScores = JSON.parse(localStorage.getItem("allScores"));
+    console.log(allScores)};
 
 console.log(allScores);
 
@@ -11,6 +20,13 @@ listofscores.innerHTML = allScores.map(score => {
     return `<li class="high-score">${score.initials}-${score.score}</li>`;
 }).join("");
 
+
+ function clearLocalStorage () {
+     localStorage.clear();
+    listofscores.innerHTML = [];
+ };
+
+ clearHighscores.addEventListener("click", clearLocalStorage);
 
 // listofscores.innerHTML = 
 //     allScores
