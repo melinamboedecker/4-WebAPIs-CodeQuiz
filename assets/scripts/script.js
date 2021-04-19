@@ -210,6 +210,7 @@ function nextQuestion() {
 //end of quiz, displays users final score and gives place to enter user initials
 function calcScore() {
     headerElement.textContent = "All Done!";
+    buttonContainer.style.display = "none";
     timerText.style.display = "none";
     timerElement.style.display = "none";
     initialsElement.style.display = "flex";
