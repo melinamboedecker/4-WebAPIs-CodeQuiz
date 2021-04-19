@@ -32,6 +32,16 @@ var allQuestions = [
         correctAnswer: 'two'
     },
     {
+        question: 'What does the JavaScript "this" keyword refer to?',
+        answers: ['The DOM', 'The current element', 'The next function', 'The object it belongs to'],
+        correctAnswer: 'The object it belongs to'
+    },
+    {
+        question: "Which is the correct syntax for JSON data?",
+        answers: ['Data is in a string', 'Always use  the $ symbol', 'Data is in name/value pairs', 'Data is in an array'],
+        correctAnswer: 'Data is in name/value pairs'
+    },
+    {
         question: "Which of the following data types is NOT a primitive data type?",
         answers: ['Object', 'String', 'BigInt', 'Number'],
         correctAnswer: 'Object'
