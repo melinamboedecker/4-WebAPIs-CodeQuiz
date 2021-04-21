@@ -9,6 +9,7 @@ var header = document.querySelector("header");
 var answerButtons
 var initialsElement = document.querySelector("#submit-initials");
 var submitButton = document.querySelector("#submit-btn");
+var initialsEntry = document.querySelector("#initials-entry");
 
 //create elements
 
@@ -218,12 +219,28 @@ function calcScore() {
     topP.style.display = "flex";
     topP.textContent = "Your final score is " + score;
     console.log(initials);
+
+    function validate() {
+        
+    }
+
+   
+
     submitButton.addEventListener("click", function(event) {
+        event.preventDefault();
         console.log(this.textContent);
+            if (initials.value == "") {
+                alert("Enter your initials");
+                initials.focus();
+                return;
+            }
+            if (!/^[a-zA-Z]*$/g.test(initials.value)) {
+                alert("Invalid characters, enter your initials");
+                initials.value = "";
+                return;
+            }
         
         var allScores;
-
-
 
         console.log(localStorage.getItem("allScores"));
         //sets to empty array if nothing currently in local storage
@@ -255,6 +272,7 @@ function calcScore() {
         saveAllScores(event);
         //sends user to highscores page
         location.href = "highscores.html";
+    
     });
 }
 
